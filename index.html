@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="word-block">
+      <h1 class="title">Jordle</h1>
+      <h2 class="subheading">Guess the 5 letter word</h2>
+      <h3 class="attempts-text">
+        Attempts remaining: <span id="attemptsLeftDisplay"></span>
+      </h3>
+      <div id="timerDisplay">00 : 00 : 00 : 000</div>
+      <form id="wordForm" action="#">
+        <div id="inputArea"></div>
+
+        <button id="wordBtn">Check</button>
+      </form>
+      <div id="outcome"></div>
+      <div id="wordTextArea"></div>
+      <div id="definitionTextArea"></div>
+      <button id="restartBtn">Restart</button>
+      <h5 class="help-text">
+        A green box means the letter is in the right place. <br />
+        An orange box means the word contains the letter.
+      </h5>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

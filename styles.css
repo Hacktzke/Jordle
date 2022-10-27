@@ -1,0 +1,102 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100vh;
+}
+
+.title {
+  text-transform: uppercase;
+}
+
+.subheading {
+  margin: 10px 0;
+}
+
+.attempts-text {
+  margin-bottom: 10px;
+}
+
+.word-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#wordForm {
+  text-align: center;
+}
+
+.input-line {
+  margin: 20px 0;
+}
+
+.input-box {
+  width: 60px;
+  height: 60px;
+  font-size: 2rem;
+  text-align: center;
+  margin: 0 5px;
+  border-radius: 5px;
+  border: 2px solid black;
+  box-shadow: 0 5px 10px rgb(191, 191, 191);
+}
+.orange {
+  background-color: rgb(255, 211, 128);
+}
+
+.green {
+  background-color: rgb(128, 255, 128);
+}
+
+button {
+  width: 100px;
+  margin: auto;
+  text-align: center;
+  margin: 15px 0;
+  padding: 5px 0;
+  border-radius: 5px;
+  border: 1px solid black;
+  box-shadow: 0 5px 10px rgb(191, 191, 191);
+  text-transform: uppercase;
+}
+
+#outcome {
+  margin-top: 5px;
+  font-size: 1.5rem;
+}
+#wordTextArea {
+  font-size: 2rem;
+  margin: 10px 0;
+  text-transform: uppercase;
+}
+
+#definitionTextArea {
+  max-width: 360px;
+  padding: 0 10px;
+}
+
+.help-text {
+  width: 100%;
+  text-align: center;
+  padding: 0 10px;
+}
+
+@media screen and (max-width: 370px) {
+  .input-box {
+    width: 50px;
+    height: 50px;
+    font-size: 2rem;
+    margin: 0 2px;
+  }
+}
