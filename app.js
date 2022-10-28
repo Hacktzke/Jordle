@@ -106,7 +106,7 @@ document.body.addEventListener("touchend", function (e) {
 
 wordBtn.addEventListener("touchend", (e) => {
   // TESTING CODE BELOW
-  document.body.style.backgroundColor = "green";
+  // document.body.style.backgroundColor = "green";
   checkword(e);
 });
 
@@ -134,6 +134,8 @@ function checkword(e) {
         const char = currentBox.value;
         guessedWord += char;
         if (word.includes(char)) {
+          // TEST CODE HERE
+          document.body.style.backgroundColor = "green";
           currentBox.classList.add("orange");
         }
         if (char === word[i]) {
