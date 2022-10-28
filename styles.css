@@ -12,6 +12,7 @@ body {
   align-items: center;
   font-family: Arial, Helvetica, sans-serif;
   height: 100vh;
+  background-color: rgb(242, 242, 242);
 }
 
 .title {
