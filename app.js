@@ -119,7 +119,7 @@ function checkword(e) {
   if (isPlaying) {
     const currentLine = document.querySelector(`.line-${attempts}`);
     const currentLineBoxes = currentLine.childNodes;
-    let fullWord = true;
+    var fullWord = true;
     currentLineBoxes.forEach((element) => {
       if (!element.value) {
         fullWord = false;
@@ -129,7 +129,7 @@ function checkword(e) {
     if (fullWord) {
       updateAttempts();
       inputsReadOnly(currentLineBoxes);
-      for (let i = 0; i < currentLineBoxes.length; i++) {
+      for (var i = 0; i < currentLineBoxes.length; i++) {
         const currentBox = currentLineBoxes[i];
         const char = currentBox.value;
         guessedWord += char;
