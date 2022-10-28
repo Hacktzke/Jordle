@@ -1,3 +1,5 @@
+// COLOR CHANGE NOT WORKING ON MOBILE
+
 const inputBoxes = document.querySelectorAll(".input-box");
 const wordBtn = document.querySelector("#wordBtn");
 const wordForm = document.querySelector("#wordForm");
@@ -115,10 +117,11 @@ wordBtn.addEventListener("click", (e) => {
 });
 
 function checkword(e) {
-  e.preventDefault;
+  e.preventDefault();
   if (isPlaying) {
     const currentLine = document.querySelector(`.line-${attempts}`);
     const currentLineBoxes = currentLine.childNodes;
+    // VAR USED INSTEAD OF LET
     var fullWord = true;
     currentLineBoxes.forEach((element) => {
       if (!element.value) {
@@ -129,15 +132,15 @@ function checkword(e) {
     if (fullWord) {
       updateAttempts();
       inputsReadOnly(currentLineBoxes);
+      alert("B4 4 LOOP");
       for (var i = 0; i < currentLineBoxes.length; i++) {
         const currentBox = currentLineBoxes[i];
         const char = currentBox.value;
         guessedWord += char;
+        alert("IN 4 LOOP");
         if (word.includes(char)) {
-          // TEST CODE HERE
-          alert("MOBILE TEST");
+          alert("IN COLOR CHANGE");
           currentBox.classList.add("orange");
-          currentBox.style.backgroundColor = "brown";
         }
         if (char === word[i]) {
           currentBox.classList.add("green");
