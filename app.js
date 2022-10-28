@@ -97,9 +97,9 @@ document.body.addEventListener("keydown", function (e) {
   }
 });
 
-// wordBtn.addEventListener("touchend", (e) => {
-//   checkword(e);
-// });
+wordBtn.addEventListener("touchend", (e) => {
+  checkword(e);
+});
 
 wordBtn.addEventListener("click", (e) => {
   checkword(e);
