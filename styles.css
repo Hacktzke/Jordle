@@ -57,6 +57,10 @@ body {
   background-color: rgb(128, 255, 128);
 }
 
+.grey {
+  background-color: rgb(158, 157, 157);
+}
+
 button {
   width: 100px;
   margin: auto;

@@ -132,17 +132,17 @@ function checkword(e) {
     if (fullWord) {
       updateAttempts();
       inputsReadOnly(currentLineBoxes);
-      alert("B4 4 LOOP");
       for (var i = 0; i < currentLineBoxes.length; i++) {
         const currentBox = currentLineBoxes[i];
         const char = currentBox.value;
         guessedWord += char;
-        alert("IN 4 LOOP");
+        currentBox.classList.add("grey");
         if (word.includes(char)) {
-          alert("IN COLOR CHANGE");
+          currentBox.classList.remove("grey");
           currentBox.classList.add("orange");
         }
         if (char === word[i]) {
+          currentBox.classList.remove("grey");
           currentBox.classList.add("green");
         }
       }
