@@ -85,6 +85,10 @@ document.body.addEventListener("keyup", function (e) {
   }
 });
 
+wordBtn.addEventListener("touchstart", (e) => {
+  document.body.style.backgroundColor = "brown";
+});
+
 wordBtn.addEventListener("click", (e) => {
   e.preventDefault;
   if (isPlaying) {
