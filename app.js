@@ -1,5 +1,3 @@
-// ADD DEFINITIONS
-
 const inputBoxes = document.querySelectorAll(".input-box");
 const wordBtn = document.querySelector("#wordBtn");
 const wordForm = document.querySelector("#wordForm");
@@ -20,6 +18,7 @@ let attemptsLeft = 5;
 let [milliseconds, seconds, minutes, hours] = [0, 0, 0, 0];
 let int = null;
 
+// TIMER FUNCTIONS
 const startTimer = () => {
   if (isPlaying) {
     if (int !== null) {
@@ -67,6 +66,7 @@ const timerCalc = () => {
   timerDisplay.innerHTML = ` ${h} : ${m} : ${s} : ${ms}`;
 };
 
+// EVENT LISTENERS
 document.body.addEventListener("keyup", function (e) {
   let inputBox = e.target;
   if (inputBox.classList == "input-box") {
@@ -76,7 +76,13 @@ document.body.addEventListener("keyup", function (e) {
         inputBox.nextElementSibling.focus();
       }
     } else {
-      if (e.code !== "Backspace") inputBox.value = "";
+      if (e.code !== "Backspace") {
+        alert("Enter letters only");
+        inputBox.value = "";
+        if (e.code === "Tab") {
+          inputBox.previousElementSibling.focus();
+        }
+      }
     }
   }
   if (e.code === "Backspace" && inputBox.previousElementSibling) {
@@ -85,11 +91,21 @@ document.body.addEventListener("keyup", function (e) {
   }
 });
 
-wordBtn.addEventListener("touchstart", (e) => {
-  document.body.style.backgroundColor = "brown";
+document.body.addEventListener("keydown", function (e) {
+  if (e.code === "Enter") {
+    checkword(e);
+  }
 });
 
+// wordBtn.addEventListener("touchend", (e) => {
+//   checkword(e);
+// });
+
 wordBtn.addEventListener("click", (e) => {
+  checkword(e);
+});
+
+function checkword(e) {
   e.preventDefault;
   if (isPlaying) {
     const currentLine = document.querySelector(`.line-${attempts}`);
@@ -140,7 +156,7 @@ wordBtn.addEventListener("click", (e) => {
       alert("Enter the missing letter(s)");
     }
   }
-});
+}
 
 const inputsReadOnly = (inputs) => {
   inputs.forEach((i) => {
@@ -154,6 +170,7 @@ restartBtn.addEventListener("click", (e) => {
   startGame();
 });
 
+// FUNCTIONS BELWO RETRIEVE WORD AND MEANING THROUGH APIS
 const getWord = async () => {
   try {
     const res = await fetch(
@@ -230,6 +247,7 @@ const startGame = () => {
   word = "";
   outcome.textContent = "";
   wordTextArea.textContent = "";
+  definitionTextArea.textContent = "";
   addWordRow();
 };
 
