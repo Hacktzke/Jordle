@@ -137,6 +137,7 @@ function checkword(e) {
           // TEST CODE HERE
           alert("MOBILE TEST");
           currentBox.classList.add("orange");
+          currentBox.style.backgroundColor = "brown";
         }
         if (char === word[i]) {
           currentBox.classList.add("green");
