@@ -97,7 +97,16 @@ document.body.addEventListener("keydown", function (e) {
   }
 });
 
+document.body.addEventListener("touchend", function (e) {
+  if (e.code === "Enter") {
+    document.body.style.backgroundColor = "blue";
+    checkword(e);
+  }
+});
+
 wordBtn.addEventListener("touchend", (e) => {
+  // TESTING CODE BELOW
+  document.body.style.backgroundColor = "green";
   checkword(e);
 });
 
