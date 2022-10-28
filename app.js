@@ -157,7 +157,6 @@ function checkword(e) {
       }
       if (attempts < 5) {
         guessedWord = "";
-
         addWordRow();
       } else {
         stopTimer();
