@@ -135,7 +135,7 @@ function checkword(e) {
         guessedWord += char;
         if (word.includes(char)) {
           // TEST CODE HERE
-          document.body.style.backgroundColor = "green";
+          alert("MOBILE TEST");
           currentBox.classList.add("orange");
         }
         if (char === word[i]) {
