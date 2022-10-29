@@ -87,7 +87,7 @@ document.body.addEventListener("keyup", function (e) {
       }
     }
   }
-  if (e.code === "Backspace" && inputBox.previousElementSibling) {
+  if (e.code === "Backspace" && !inputBox.value) {
     inputBox.previousElementSibling.focus();
     inputBox.previousElementSibling.value = "";
   }
@@ -133,13 +133,12 @@ function checkword(e) {
       updateAttempts();
       inputsReadOnly(currentLineBoxes);
       for (var i = 0; i < currentLineBoxes.length; i++) {
-        const currentBox = currentLineBoxes[i];
-        const char = currentBox.value;
+        var currentBox = currentLineBoxes[i];
+        var char = currentBox.value;
         guessedWord += char;
         // currentBox.classList.add("grey");
         currentBox.style.backgroundColor = "#9e9d9d";
         if (word.indexOf(char) !== -1) {
-          console.log("INDEXOF");
           // currentBox.classList.remove("grey");
           // currentBox.classList.add("orange");
           currentBox.style.backgroundColor = "#ffd380";
