@@ -136,14 +136,18 @@ function checkword(e) {
         const currentBox = currentLineBoxes[i];
         const char = currentBox.value;
         guessedWord += char;
-        currentBox.classList.add("grey");
+        // currentBox.classList.add("grey");
+        currentBox.style.backgroundColor = "#9e9d9d";
         if (word.indexOf(char) !== -1) {
-          currentBox.classList.remove("grey");
-          currentBox.classList.add("orange");
+          console.log("INDEXOF");
+          // currentBox.classList.remove("grey");
+          // currentBox.classList.add("orange");
+          currentBox.style.backgroundColor = "#ffd380";
         }
         if (char === word[i]) {
-          currentBox.classList.remove("grey");
-          currentBox.classList.add("green");
+          // currentBox.classList.remove("grey");
+          // currentBox.classList.add("green");
+          currentBox.style.backgroundColor = "#80ff80";
         }
       }
       if (guessedWord === word) {
@@ -151,7 +155,7 @@ function checkword(e) {
         outcome.textContent = "YOU WIN!";
         wordTextArea.textContent = word;
         displayDefinition();
-
+        document.activeElement.blur();
         isPlaying = false;
         return;
       }
