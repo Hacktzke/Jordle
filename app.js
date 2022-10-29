@@ -131,13 +131,13 @@ function checkword(e) {
 
     if (fullWord) {
       updateAttempts();
-      inputsReadOnly(currentLineBoxes);
       for (var i = 0; i < currentLineBoxes.length; i++) {
         var currentBox = currentLineBoxes[i];
         var char = currentBox.value;
         guessedWord += char;
         currentBox.classList.add("grey");
         currentBox.style.backgroundColor = "#9e9d9d";
+        // IF STATEMENT WORKING INTERMITTENTLY FOR IOS
         if (word.indexOf(currentLineBoxes[i].value) !== -1) {
           alert("LETTER IN WORD");
           currentBox.classList.remove("grey");
@@ -149,6 +149,7 @@ function checkword(e) {
           currentBox.classList.add("green");
           currentBox.style.backgroundColor = "#80ff80";
         }
+        inputsReadOnly(currentLineBoxes);
       }
       if (guessedWord === word) {
         stopTimer();

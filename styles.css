@@ -50,15 +50,15 @@ body {
   box-shadow: 0 5px 10px rgb(191, 191, 191);
 }
 .orange {
-  background-color: rgb(255, 211, 128);
+  background-color: #ffd380;
 }
 
 .green {
-  background-color: rgb(128, 255, 128);
+  background-color: #80ff80;
 }
 
 .grey {
-  background-color: rgb(158, 157, 157);
+  background-color: #9e9d9d;
 }
 
 button {
