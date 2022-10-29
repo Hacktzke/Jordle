@@ -138,16 +138,13 @@ function checkword(e) {
         guessedWord += char;
         currentBox.classList.add("grey");
         currentBox.style.backgroundColor = "#9e9d9d";
-        if (i) {
-          alert("IF WORKING");
-        }
-        if (word.indexOf(char) !== -1) {
+        if (word.indexOf(currentLineBoxes[i].value) !== -1) {
           alert("LETTER IN WORD");
           currentBox.classList.remove("grey");
           currentBox.classList.add("orange");
           currentBox.style.backgroundColor = "#ffd380";
         }
-        if (char === word[i]) {
+        if (currentLineBoxes[i].value === word[i]) {
           currentBox.classList.remove("grey");
           currentBox.classList.add("green");
           currentBox.style.backgroundColor = "#80ff80";
