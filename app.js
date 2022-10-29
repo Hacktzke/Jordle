@@ -137,7 +137,7 @@ function checkword(e) {
         const char = currentBox.value;
         guessedWord += char;
         currentBox.classList.add("grey");
-        if (word.includes(char)) {
+        if (word.indexOf(char) !== -1) {
           currentBox.classList.remove("grey");
           currentBox.classList.add("orange");
         }
@@ -164,6 +164,8 @@ function checkword(e) {
         wordTextArea.textContent = word;
         displayDefinition();
         isPlaying = false;
+        document.activeElement.blur();
+
         return;
       }
     } else {
