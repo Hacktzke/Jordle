@@ -138,6 +138,9 @@ function checkword(e) {
         guessedWord += char;
         currentBox.classList.add("grey");
         currentBox.style.backgroundColor = "#9e9d9d";
+        if (i) {
+          alert("IF WORKING");
+        }
         if (word.indexOf(char) !== -1) {
           alert("LETTER IN WORD");
           currentBox.classList.remove("grey");
