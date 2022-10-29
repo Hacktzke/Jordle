@@ -131,6 +131,7 @@ function checkword(e) {
 
     if (fullWord) {
       updateAttempts();
+      alert(word);
       for (var i = 0; i < currentLineBoxes.length; i++) {
         var currentBox = currentLineBoxes[i];
         var char = currentBox.value;
