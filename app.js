@@ -116,6 +116,29 @@ wordBtn.addEventListener("click", (e) => {
   checkword(e);
 });
 
+function checkLine(currentLineBoxes) {
+  for (var i = 0; i < currentLineBoxes.length; i++) {
+    var currentBox = currentLineBoxes[i];
+    var char = currentBox.value;
+    guessedWord += char;
+    // currentBox.classList.add("grey");
+    currentBox.style.backgroundColor = "#9e9d9d";
+
+    if (word.indexOf(currentLineBoxes[i].value) !== -1) {
+      // alert("LETTER IN WORD");
+      // currentBox.classList.remove("grey");
+      // currentBox.classList.add("orange");
+      currentBox.style.backgroundColor = "#ffd380";
+    }
+    if (currentLineBoxes[i].value === word[i]) {
+      // currentBox.classList.remove("grey");
+      // currentBox.classList.add("green");
+      currentBox.style.backgroundColor = "#80ff80";
+    }
+    inputsReadOnly(currentLineBoxes);
+  }
+}
+
 function checkword(e) {
   e.preventDefault();
   if (isPlaying) {
@@ -132,33 +155,7 @@ function checkword(e) {
     if (fullWord) {
       updateAttempts();
       alert(word);
-      for (var i = 0; i < currentLineBoxes.length; i++) {
-        var currentBox = currentLineBoxes[i];
-        var char = currentBox.value;
-        guessedWord += char;
-        // currentBox.classList.add("grey");
-        // currentBox.style.backgroundColor = "#9e9d9d";
-        // IF STATEMENT WORKING INTERMITTENTLY FOR IOS
-        for (let index = 0; index < word.length; index++) {
-          if (word[index] == currentLineBoxes[i].value) {
-            alert("NEW LOOP WORKING");
-            currentLineBoxes[i].classList.remove("grey");
-            currentLineBoxes[i].classList.add("orange");
-          }
-        }
-        // if (word.indexOf(currentLineBoxes[i].value) !== -1) {
-        //   alert("LETTER IN WORD");
-        //   currentBox.classList.remove("grey");
-        //   currentBox.classList.add("orange");
-        //   currentBox.style.backgroundColor = "#ffd380";
-        // }
-        if (currentLineBoxes[i].value === word[i]) {
-          currentBox.classList.remove("grey");
-          currentBox.classList.add("green");
-          currentBox.style.backgroundColor = "#80ff80";
-        }
-        inputsReadOnly(currentLineBoxes);
-      }
+      checkLine(currentLineBoxes);
       if (guessedWord === word) {
         stopTimer();
         outcome.textContent = "YOU WIN!";
