@@ -136,16 +136,16 @@ function checkword(e) {
         var currentBox = currentLineBoxes[i];
         var char = currentBox.value;
         guessedWord += char;
-        // currentBox.classList.add("grey");
+        currentBox.classList.add("grey");
         currentBox.style.backgroundColor = "#9e9d9d";
         if (word.indexOf(char) !== -1) {
-          // currentBox.classList.remove("grey");
-          // currentBox.classList.add("orange");
+          currentBox.classList.remove("grey");
+          currentBox.classList.add("orange");
           currentBox.style.backgroundColor = "#ffd380";
         }
         if (char === word[i]) {
-          // currentBox.classList.remove("grey");
-          // currentBox.classList.add("green");
+          currentBox.classList.remove("grey");
+          currentBox.classList.add("green");
           currentBox.style.backgroundColor = "#80ff80";
         }
       }
