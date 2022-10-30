@@ -116,6 +116,7 @@ wordBtn.addEventListener("click", (e) => {
   checkword(e);
 });
 
+// REFACTOR THIS. STILL NOT WORKING ON IOS
 function checkLine(currentLineBoxes) {
   for (var i = 0; i < currentLineBoxes.length; i++) {
     var currentBox = currentLineBoxes[i];
@@ -154,7 +155,7 @@ function checkword(e) {
 
     if (fullWord) {
       updateAttempts();
-      alert(word);
+      // alert(word);
       checkLine(currentLineBoxes);
       if (guessedWord === word) {
         stopTimer();
