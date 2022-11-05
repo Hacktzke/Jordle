@@ -1,3 +1,5 @@
+const jsConfetti = new JSConfetti();
+
 const inputBoxes = document.querySelectorAll(".input-box");
 const wordBtn = document.querySelector("#wordBtn");
 const wordForm = document.querySelector("#wordForm");
@@ -95,7 +97,6 @@ document.body.addEventListener("keydown", function (e) {
   if (e.code === "Backspace" && !e.target.value) {
     inputBox.previousElementSibling.focus();
     inputBox.previousElementSibling.value = "";
-    console.log(e.target.value);
   }
 });
 
@@ -104,6 +105,7 @@ wordBtn.addEventListener("click", (e) => {
 });
 
 function checkLine(currentLineBoxes) {
+  alert(word);
   for (let i = 0; i < currentLineBoxes.length; i++) {
     let currentBox = currentLineBoxes[i];
     let char = currentBox.value.toUpperCase();
@@ -143,6 +145,7 @@ function checkword(e) {
         displayDefinition();
         document.activeElement.blur();
         isPlaying = false;
+        jsConfetti.addConfetti();
         return;
       }
       if (attempts < 5) {
