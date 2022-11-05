@@ -144,10 +144,10 @@ function checkLine(currentLineBoxes) {
 function checkword(e) {
   e.preventDefault();
   if (isPlaying) {
-    const currentLine = document.querySelector(`.line-${attempts}`);
-    const currentLineBoxes = currentLine.childNodes;
+    let currentLine = document.querySelector(`.line-${attempts}`);
+    let currentLineBoxes = currentLine.childNodes;
     // VAR USED INSTEAD OF LET
-    var fullWord = true;
+    let fullWord = true;
     for (let i = 0; i < currentLineBoxes.length; i++) {
       if (!currentLineBoxes[i].value) {
         fullWord = false;
