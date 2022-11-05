@@ -118,9 +118,9 @@ wordBtn.addEventListener("click", (e) => {
 
 // REFACTOR THIS. STILL NOT WORKING ON IOS
 function checkLine(currentLineBoxes) {
-  for (var i = 0; i < currentLineBoxes.length; i++) {
-    var currentBox = currentLineBoxes[i];
-    var char = currentBox.value;
+  for (let i = 0; i < currentLineBoxes.length; i++) {
+    let currentBox = currentLineBoxes[i];
+    let char = currentBox.value;
     guessedWord += char;
     // currentBox.classList.add("grey");
     currentBox.style.backgroundColor = "#9e9d9d";
@@ -148,11 +148,16 @@ function checkword(e) {
     const currentLineBoxes = currentLine.childNodes;
     // VAR USED INSTEAD OF LET
     var fullWord = true;
-    currentLineBoxes.forEach((element) => {
-      if (!element.value) {
+    for (let i = 0; i < currentLineBoxes.length; i++) {
+      if (!currentLineBoxes[i].value) {
         fullWord = false;
       }
-    });
+    }
+    // currentLineBoxes.forEach((element) => {
+    //   if (!element.value) {
+    //     fullWord = false;
+    //   }
+    // });
 
     if (fullWord) {
       updateAttempts();
