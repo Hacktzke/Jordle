@@ -105,7 +105,6 @@ wordBtn.addEventListener("click", (e) => {
 });
 
 function checkLine(currentLineBoxes) {
-  alert(word);
   for (let i = 0; i < currentLineBoxes.length; i++) {
     let currentBox = currentLineBoxes[i];
     let char = currentBox.value.toUpperCase();
