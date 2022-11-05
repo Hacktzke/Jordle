@@ -165,7 +165,7 @@ function checkword(e) {
       alert(guessedWord);
       alert(word);
 
-      if (guessedWord === word) {
+      if (guessedWord == word) {
         stopTimer();
         outcome.textContent = "YOU WIN!";
         wordTextArea.textContent = word;
@@ -250,7 +250,7 @@ const addWordRow = () => {
     wordInput.classList.add("input-box");
     wordInput.setAttribute("maxlength", "1");
     wordInput.setAttribute("type", "text");
-    wordInput.style.textTransform = "uppercase";
+    // wordInput.style.textTransform = "uppercase";
     inputLine.append(wordInput);
   }
   inputArea.append(inputLine);
