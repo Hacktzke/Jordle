@@ -1,12 +1,10 @@
-// COLOR CHANGE NOT WORKING ON MOBILE
-
 const inputBoxes = document.querySelectorAll(".input-box");
 const wordBtn = document.querySelector("#wordBtn");
 const wordForm = document.querySelector("#wordForm");
 const inputArea = document.querySelector("#inputArea");
 const restartBtn = document.querySelector("#restartBtn");
 const wordTextArea = document.querySelector("#wordTextArea");
-const defintionTextArea = document.querySelector("#defintionTextArea");
+const definitionTextArea = document.querySelector("#definitionTextArea");
 const attemptsLeftDisplay = document.querySelector("#attemptsLeftDisplay");
 const timerDisplay = document.querySelector("#timerDisplay");
 const outcome = document.querySelector("#outcome");
@@ -87,68 +85,35 @@ document.body.addEventListener("keyup", function (e) {
       }
     }
   }
-
-  if (
-    e.code === "Backspace" &&
-    !inputBox.value &&
-    inputBox.nextElementSibling
-  ) {
-    inputBox.previousElementSibling.focus();
-    inputBox.previousElementSibling.value = "";
-  }
-  if (
-    e.code === "Backspace" &&
-    !inputBox.value &&
-    !inputBox.nextElementSibling
-  ) {
-    inputBox.previousElementSibling.focus();
-  }
 });
 
 document.body.addEventListener("keydown", function (e) {
+  let inputBox = e.target;
   if (e.code === "Enter") {
     checkword(e);
   }
+  if (e.code === "Backspace" && !e.target.value) {
+    inputBox.previousElementSibling.focus();
+    inputBox.previousElementSibling.value = "";
+    console.log(e.target.value);
+  }
 });
-
-// document.body.addEventListener("touchend", function (e) {
-//   if (e.code === "Enter") {
-//     document.body.style.backgroundColor = "blue";
-//     checkword(e);
-//   }
-// });
-
-// wordBtn.addEventListener("touchend", (e) => {
-//   // TESTING CODE BELOW
-//   document.body.style.backgroundColor = "green";
-//   checkword(e);
-// });
 
 wordBtn.addEventListener("click", (e) => {
   checkword(e);
 });
 
-// REFACTOR THIS. STILL NOT WORKING ON IOS
 function checkLine(currentLineBoxes) {
   for (let i = 0; i < currentLineBoxes.length; i++) {
     let currentBox = currentLineBoxes[i];
-
     let char = currentBox.value.toUpperCase();
-    alert(char);
     guessedWord += char;
-    // currentBox.classList.add("grey");
     currentBox.style.backgroundColor = "#9e9d9d";
 
     if (word.indexOf(char) !== -1) {
-      // alert("LETTER IN WORD");
-      // currentBox.classList.remove("grey");
-      // currentBox.classList.add("orange");
       currentBox.style.backgroundColor = "#ffd380";
     }
     if (char === word[i]) {
-      // alert("CORRECT WORD");
-      // currentBox.classList.remove("grey");
-      // currentBox.classList.add("green");
       currentBox.style.backgroundColor = "#80ff80";
     }
     inputsReadOnly(currentLineBoxes);
@@ -160,27 +125,18 @@ function checkword(e) {
   if (isPlaying) {
     let currentLine = document.querySelector(`.line-${attempts}`);
     let currentLineBoxes = currentLine.childNodes;
-
-    // VAR USED INSTEAD OF LET
     let fullWord = true;
+
     for (let i = 0; i < currentLineBoxes.length; i++) {
       if (!currentLineBoxes[i].value) {
         fullWord = false;
       }
     }
-    // currentLineBoxes.forEach((element) => {
-    //   if (!element.value) {
-    //     fullWord = false;
-    //   }
-    // });
 
     if (fullWord) {
       updateAttempts();
       checkLine(currentLineBoxes);
-      alert(guessedWord);
-      alert(word);
-
-      if (guessedWord == word) {
+      if (guessedWord === word) {
         stopTimer();
         outcome.textContent = "YOU WIN!";
         wordTextArea.textContent = word;
@@ -199,7 +155,6 @@ function checkword(e) {
         displayDefinition();
         isPlaying = false;
         document.activeElement.blur();
-
         return;
       }
     } else {

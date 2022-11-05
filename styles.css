@@ -49,17 +49,6 @@ body {
   border: 2px solid black;
   box-shadow: 0 5px 10px rgb(191, 191, 191);
 }
-.orange {
-  background-color: #ffd380 !important;
-}
-
-.green {
-  background-color: #80ff80 !important;
-}
-
-.grey {
-  background-color: #9e9d9d;
-}
 
 button {
   width: 100px;
