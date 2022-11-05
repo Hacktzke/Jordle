@@ -126,14 +126,14 @@ function checkLine(currentLineBoxes) {
     currentBox.style.backgroundColor = "#9e9d9d";
 
     if (word.indexOf(currentLineBoxes[i].value) !== -1) {
-      // alert("LETTER IN WORD");
-      // currentBox.classList.remove("grey");
-      // currentBox.classList.add("orange");
+      alert("LETTER IN WORD");
+      currentBox.classList.remove("grey");
+      currentBox.classList.add("orange");
       currentBox.style.backgroundColor = "#ffd380";
     }
     if (currentLineBoxes[i].value === word[i]) {
-      // currentBox.classList.remove("grey");
-      // currentBox.classList.add("green");
+      currentBox.classList.remove("grey");
+      currentBox.classList.add("green");
       currentBox.style.backgroundColor = "#80ff80";
     }
     inputsReadOnly(currentLineBoxes);
