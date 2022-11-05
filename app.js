@@ -99,18 +99,18 @@ document.body.addEventListener("keydown", function (e) {
   }
 });
 
-document.body.addEventListener("touchend", function (e) {
-  if (e.code === "Enter") {
-    document.body.style.backgroundColor = "blue";
-    checkword(e);
-  }
-});
+// document.body.addEventListener("touchend", function (e) {
+//   if (e.code === "Enter") {
+//     document.body.style.backgroundColor = "blue";
+//     checkword(e);
+//   }
+// });
 
-wordBtn.addEventListener("touchend", (e) => {
-  // TESTING CODE BELOW
-  // document.body.style.backgroundColor = "green";
-  checkword(e);
-});
+// wordBtn.addEventListener("touchend", (e) => {
+//   // TESTING CODE BELOW
+//   document.body.style.backgroundColor = "green";
+//   checkword(e);
+// });
 
 wordBtn.addEventListener("click", (e) => {
   checkword(e);
@@ -121,6 +121,7 @@ function checkLine(currentLineBoxes) {
   for (let i = 0; i < currentLineBoxes.length; i++) {
     let currentBox = currentLineBoxes[i];
     let char = currentBox.value;
+    alert(char);
     guessedWord += char;
     // currentBox.classList.add("grey");
     currentBox.style.backgroundColor = "#9e9d9d";
@@ -214,7 +215,6 @@ const getWord = async () => {
     const data = await res.json();
     word = data[0];
     getDefinition();
-
     return word;
   } catch (e) {
     alert("I'm sorry we cannot start the game right now...");
