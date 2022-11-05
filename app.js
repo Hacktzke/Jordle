@@ -87,9 +87,21 @@ document.body.addEventListener("keyup", function (e) {
       }
     }
   }
-  if (e.code === "Backspace" && !inputBox.value) {
+
+  if (
+    e.code === "Backspace" &&
+    !inputBox.value &&
+    inputBox.nextElementSibling
+  ) {
     inputBox.previousElementSibling.focus();
     inputBox.previousElementSibling.value = "";
+  }
+  if (
+    e.code === "Backspace" &&
+    !inputBox.value &&
+    !inputBox.nextElementSibling
+  ) {
+    inputBox.previousElementSibling.focus();
   }
 });
 
