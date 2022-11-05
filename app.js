@@ -127,13 +127,13 @@ function checkLine(currentLineBoxes) {
 
     if (word.indexOf(currentLineBoxes[i].value) !== -1) {
       alert("LETTER IN WORD");
-      currentBox.classList.remove("grey");
-      currentBox.classList.add("orange");
+      // currentBox.classList.remove("grey");
+      // currentBox.classList.add("orange");
       currentBox.style.backgroundColor = "#ffd380";
     }
     if (currentLineBoxes[i].value === word[i]) {
-      currentBox.classList.remove("grey");
-      currentBox.classList.add("green");
+      // currentBox.classList.remove("grey");
+      // currentBox.classList.add("green");
       currentBox.style.backgroundColor = "#80ff80";
     }
     inputsReadOnly(currentLineBoxes);
@@ -247,6 +247,7 @@ const addWordRow = () => {
   }
   inputArea.append(inputLine);
   inputLine.firstChild.focus();
+  alert(word);
 };
 
 const updateAttempts = () => {
