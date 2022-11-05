@@ -132,6 +132,7 @@ function checkLine(currentLineBoxes) {
       currentBox.style.backgroundColor = "#ffd380";
     }
     if (currentLineBoxes[i].value === word[i]) {
+      alert("CORRECT WORD");
       // currentBox.classList.remove("grey");
       // currentBox.classList.add("green");
       currentBox.style.backgroundColor = "#80ff80";
