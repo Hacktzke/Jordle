@@ -126,13 +126,13 @@ function checkLine(currentLineBoxes) {
     currentBox.style.backgroundColor = "#9e9d9d";
 
     if (word.indexOf(currentLineBoxes[i].value) !== -1) {
-      alert("LETTER IN WORD");
+      // alert("LETTER IN WORD");
       // currentBox.classList.remove("grey");
       // currentBox.classList.add("orange");
       currentBox.style.backgroundColor = "#ffd380";
     }
     if (currentLineBoxes[i].value === word[i]) {
-      alert("CORRECT WORD");
+      // alert("CORRECT WORD");
       // currentBox.classList.remove("grey");
       // currentBox.classList.add("green");
       currentBox.style.backgroundColor = "#80ff80";
@@ -161,8 +161,10 @@ function checkword(e) {
 
     if (fullWord) {
       updateAttempts();
-      // alert(word);
       checkLine(currentLineBoxes);
+      alert(guessedWord);
+      alert(word);
+
       if (guessedWord === word) {
         stopTimer();
         outcome.textContent = "YOU WIN!";
@@ -253,7 +255,6 @@ const addWordRow = () => {
   }
   inputArea.append(inputLine);
   inputLine.firstChild.focus();
-  alert(word);
 };
 
 const updateAttempts = () => {
