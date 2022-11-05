@@ -132,19 +132,20 @@ wordBtn.addEventListener("click", (e) => {
 function checkLine(currentLineBoxes) {
   for (let i = 0; i < currentLineBoxes.length; i++) {
     let currentBox = currentLineBoxes[i];
-    let char = currentBox.value;
+
+    let char = currentBox.value.toUpperCase();
     alert(char);
     guessedWord += char;
     // currentBox.classList.add("grey");
     currentBox.style.backgroundColor = "#9e9d9d";
 
-    if (word.indexOf(currentLineBoxes[i].value) !== -1) {
+    if (word.indexOf(char) !== -1) {
       // alert("LETTER IN WORD");
       // currentBox.classList.remove("grey");
       // currentBox.classList.add("orange");
       currentBox.style.backgroundColor = "#ffd380";
     }
-    if (currentLineBoxes[i].value === word[i]) {
+    if (char === word[i]) {
       // alert("CORRECT WORD");
       // currentBox.classList.remove("grey");
       // currentBox.classList.add("green");
@@ -159,6 +160,7 @@ function checkword(e) {
   if (isPlaying) {
     let currentLine = document.querySelector(`.line-${attempts}`);
     let currentLineBoxes = currentLine.childNodes;
+
     // VAR USED INSTEAD OF LET
     let fullWord = true;
     for (let i = 0; i < currentLineBoxes.length; i++) {
@@ -227,6 +229,7 @@ const getWord = async () => {
     const data = await res.json();
     word = data[0];
     getDefinition();
+    word = word.toUpperCase();
     return word;
   } catch (e) {
     alert("I'm sorry we cannot start the game right now...");
@@ -262,7 +265,7 @@ const addWordRow = () => {
     wordInput.classList.add("input-box");
     wordInput.setAttribute("maxlength", "1");
     wordInput.setAttribute("type", "text");
-    // wordInput.style.textTransform = "uppercase";
+    wordInput.style.textTransform = "uppercase";
     inputLine.append(wordInput);
   }
   inputArea.append(inputLine);
