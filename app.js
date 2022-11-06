@@ -70,26 +70,6 @@ const timerCalc = () => {
 };
 
 // EVENT LISTENERS
-// document.body.addEventListener("keyup", function (e) {
-//   let inputBox = e.target;
-//   if (inputBox.classList == "input-box") {
-//     if (e.code.includes("Key") || e.code === "Enter") {
-//       startTimer();
-//       if (inputBox.value.length == 1 && inputBox.nextElementSibling) {
-//         inputBox.nextElementSibling.focus();
-//       }
-//     } else {
-//       if (e.code !== "Backspace") {
-//         alert("Enter letters only");
-//         inputBox.value = "";
-//         if (e.code === "Tab") {
-//           inputBox.previousElementSibling.focus();
-//         }
-//       }
-//     }
-//   }
-// });
-
 document.body.addEventListener("keyup", function (e) {
   let inputBox = e.target;
   if (inputBox.classList == "input-box") {
@@ -131,7 +111,6 @@ function checkLine(currentLineBoxes) {
     let char = currentBox.value.toUpperCase();
     guessedWord += char;
     currentBox.style.backgroundColor = "#9e9d9d";
-
     if (word.indexOf(char) !== -1) {
       currentBox.style.backgroundColor = "#ffd380";
     }
