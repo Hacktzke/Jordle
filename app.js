@@ -10,6 +10,7 @@ const definitionTextArea = document.querySelector("#definitionTextArea");
 const attemptsLeftDisplay = document.querySelector("#attemptsLeftDisplay");
 const timerDisplay = document.querySelector("#timerDisplay");
 const outcome = document.querySelector("#outcome");
+const reg = /^[a-zA-Z]*$/;
 
 let isPlaying = true;
 let word = "";
@@ -69,10 +70,30 @@ const timerCalc = () => {
 };
 
 // EVENT LISTENERS
+// document.body.addEventListener("keyup", function (e) {
+//   let inputBox = e.target;
+//   if (inputBox.classList == "input-box") {
+//     if (e.code.includes("Key") || e.code === "Enter") {
+//       startTimer();
+//       if (inputBox.value.length == 1 && inputBox.nextElementSibling) {
+//         inputBox.nextElementSibling.focus();
+//       }
+//     } else {
+//       if (e.code !== "Backspace") {
+//         alert("Enter letters only");
+//         inputBox.value = "";
+//         if (e.code === "Tab") {
+//           inputBox.previousElementSibling.focus();
+//         }
+//       }
+//     }
+//   }
+// });
+
 document.body.addEventListener("keyup", function (e) {
   let inputBox = e.target;
   if (inputBox.classList == "input-box") {
-    if (e.code.includes("Key") || e.code === "Enter") {
+    if (reg.test(inputBox.value) || e.code === "Enter") {
       startTimer();
       if (inputBox.value.length == 1 && inputBox.nextElementSibling) {
         inputBox.nextElementSibling.focus();
