@@ -14,6 +14,7 @@ const reg = /^[a-zA-Z]*$/;
 
 let isPlaying = true;
 let word = "";
+let fullWord = false;
 let wordMeaning = "";
 let guessedWord = "";
 let attempts = 0;
@@ -78,6 +79,9 @@ document.body.addEventListener("keyup", function (e) {
       if (inputBox.value.length == 1 && inputBox.nextElementSibling) {
         inputBox.nextElementSibling.focus();
       }
+      if (inputBox.value.length > 1) {
+        inputBox.value = inputBox.value[0];
+      }
     } else {
       if (e.code !== "Backspace") {
         alert("Enter letters only");
@@ -95,7 +99,11 @@ document.body.addEventListener("keydown", function (e) {
   if (e.code === "Enter") {
     checkword(e);
   }
-  if (e.code === "Backspace" && !e.target.value) {
+  if (
+    e.code === "Backspace" &&
+    !e.target.value &&
+    inputBox.previousElementSibling
+  ) {
     inputBox.previousElementSibling.focus();
     inputBox.previousElementSibling.value = "";
   }
@@ -105,11 +113,23 @@ wordBtn.addEventListener("click", (e) => {
   checkword(e);
 });
 
-function checkLine(currentLineBoxes) {
+function createGuessedWord(currentLineBoxes) {
+  guessedWord = "";
   for (let i = 0; i < currentLineBoxes.length; i++) {
     let currentBox = currentLineBoxes[i];
     let char = currentBox.value.toUpperCase();
     guessedWord += char;
+  }
+  console.log(guessedWord);
+  if (guessedWord.length == 5) {
+    fullWord = true;
+  }
+}
+
+function colorChars(currentLineBoxes) {
+  for (let i = 0; i < currentLineBoxes.length; i++) {
+    let currentBox = currentLineBoxes[i];
+    let char = currentBox.value.toUpperCase();
     currentBox.style.backgroundColor = "#9e9d9d";
     if (word.indexOf(char) !== -1) {
       currentBox.style.backgroundColor = "#ffd380";
@@ -121,43 +141,43 @@ function checkLine(currentLineBoxes) {
   }
 }
 
-function checkword(e) {
+async function checkword(e) {
   e.preventDefault();
+  fullWord = false;
   if (isPlaying) {
+    console.log(word);
     let currentLine = document.querySelector(`.line-${attempts}`);
     let currentLineBoxes = currentLine.childNodes;
-    let fullWord = true;
-
-    for (let i = 0; i < currentLineBoxes.length; i++) {
-      if (!currentLineBoxes[i].value) {
-        fullWord = false;
-      }
-    }
-
+    createGuessedWord(currentLineBoxes);
     if (fullWord) {
-      updateAttempts();
-      checkLine(currentLineBoxes);
-      if (guessedWord === word) {
-        stopTimer();
-        outcome.textContent = "YOU WIN!";
-        wordTextArea.textContent = word;
-        displayDefinition();
-        document.activeElement.blur();
-        isPlaying = false;
-        jsConfetti.addConfetti();
-        return;
-      }
-      if (attempts < 5) {
-        guessedWord = "";
-        addWordRow();
+      let validWord = await checkValidWord(guessedWord);
+      if (validWord) {
+        colorChars(currentLineBoxes);
+        updateAttempts();
+        if (guessedWord === word) {
+          stopTimer();
+          outcome.textContent = "YOU WIN!";
+          wordTextArea.textContent = word;
+          displayDefinition();
+          document.activeElement.blur();
+          isPlaying = false;
+          jsConfetti.addConfetti();
+          return;
+        }
+        if (attempts < 5) {
+          guessedWord = "";
+          addWordRow();
+        } else {
+          stopTimer();
+          outcome.textContent = "YOU LOSE!";
+          wordTextArea.textContent = word;
+          displayDefinition();
+          isPlaying = false;
+          document.activeElement.blur();
+          return;
+        }
       } else {
-        stopTimer();
-        outcome.textContent = "YOU LOSE!";
-        wordTextArea.textContent = word;
-        displayDefinition();
-        isPlaying = false;
-        document.activeElement.blur();
-        return;
+        alert(`"${guessedWord}" is not a valid word...`);
       }
     } else {
       alert("Enter the missing letter(s)");
@@ -177,7 +197,7 @@ restartBtn.addEventListener("click", (e) => {
   startGame();
 });
 
-// FUNCTIONS BELWO RETRIEVE WORD AND MEANING THROUGH APIS
+// FUNCTIONS BELOW RETRIEVE WORD AND MEANING THROUGH APIS
 const getWord = async () => {
   try {
     const res = await fetch(
@@ -190,6 +210,17 @@ const getWord = async () => {
     return word;
   } catch (e) {
     alert("I'm sorry we cannot start the game right now...");
+  }
+};
+
+const checkValidWord = async (word) => {
+  try {
+    const res = await fetch(
+      `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+    );
+    return Boolean(res.ok);
+  } catch (e) {
+    alert("Can't check if it is a valid word at the moment sorry... ");
   }
 };
 
