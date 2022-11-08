@@ -1,5 +1,4 @@
 const jsConfetti = new JSConfetti();
-
 const inputBoxes = document.querySelectorAll(".input-box");
 const wordBtn = document.querySelector("#wordBtn");
 const wordForm = document.querySelector("#wordForm");
