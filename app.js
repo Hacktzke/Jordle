@@ -103,12 +103,10 @@ document.body.addEventListener("keyup", function (e) {
 });
 
 document.body.addEventListener("keydown", function (e) {
-  e.target.classList.remove("grey");
-
   let inputBox = e.target;
   if (e.code === "Enter") {
     checkword(e);
-  }
+  } else e.target.classList.remove("grey");
   if (
     e.code === "Backspace" &&
     !e.target.value &&
