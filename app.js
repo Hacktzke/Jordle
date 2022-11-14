@@ -172,7 +172,9 @@ function colorChars(currentLineBoxes) {
         currentBox.classList.add("orange");
       } else {
         currentBox.classList.add("grey");
-        wrongChars.push(char);
+        if (!word.contains(char)) {
+          wrongChars.push(char);
+        }
       }
     }
     // console.log("WORNG LETTERS:", wrongChars);
