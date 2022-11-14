@@ -5,6 +5,18 @@
   text-align: center;
 }
 
+.green {
+  background-color: #80ff80;
+}
+
+.orange {
+  background-color: #ffd380;
+}
+
+.grey {
+  background-color: #9e9d9d;
+}
+
 body {
   display: flex;
   flex-direction: column;

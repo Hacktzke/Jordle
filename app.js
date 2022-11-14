@@ -13,6 +13,7 @@ const reg = /^[a-zA-Z]*$/;
 
 let isPlaying = true;
 let word = "";
+let wrongChars = [];
 let fullWord = false;
 let wordMeaning = "";
 let guessedWord = "";
@@ -75,7 +76,15 @@ document.body.addEventListener("keyup", function (e) {
   if (inputBox.classList == "input-box") {
     if (reg.test(inputBox.value) || e.code === "Enter") {
       startTimer();
+      // console.log(wrongChars);
+      wrongChars.forEach((char) => {
+        if (inputBox.value.toUpperCase() === char) {
+          inputBox.classList.add("grey");
+        }
+      });
       if (inputBox.value.length == 1 && inputBox.nextElementSibling) {
+        // console.log(inputBox.value);
+
         inputBox.nextElementSibling.focus();
       }
       if (inputBox.value.length > 1) {
@@ -94,6 +103,8 @@ document.body.addEventListener("keyup", function (e) {
 });
 
 document.body.addEventListener("keydown", function (e) {
+  e.target.classList.remove("grey");
+
   let inputBox = e.target;
   if (e.code === "Enter") {
     checkword(e);
@@ -105,6 +116,7 @@ document.body.addEventListener("keydown", function (e) {
   ) {
     inputBox.previousElementSibling.focus();
     inputBox.previousElementSibling.value = "";
+    inputBox.previousElementSibling.classList.remove("grey");
   }
 });
 
@@ -119,32 +131,95 @@ function createGuessedWord(currentLineBoxes) {
     let char = currentBox.value.toUpperCase();
     guessedWord += char;
   }
-  console.log(guessedWord);
+  // console.log(guessedWord);
   if (guessedWord.length == 5) {
     fullWord = true;
   }
 }
 
+// function colorChars(currentLineBoxes) {
+//   for (let i = 0; i < currentLineBoxes.length; i++) {
+//     let currentBox = currentLineBoxes[i];
+//     let char = currentBox.value.toUpperCase();
+//     currentBox.style.backgroundColor = "#9e9d9d";
+//     if (word.indexOf(char) !== -1) {
+//       currentBox.style.backgroundColor = "#ffd380";
+//     }
+//     if (char === word[i]) {
+//       currentBox.style.backgroundColor = "#80ff80";
+//     }
+//     inputsReadOnly(currentLineBoxes);
+//   }
+// }
+
 function colorChars(currentLineBoxes) {
+  let lettersLeft = word;
+
+  // console.log(word);
+  // console.log(lettersLeft);
   for (let i = 0; i < currentLineBoxes.length; i++) {
     let currentBox = currentLineBoxes[i];
     let char = currentBox.value.toUpperCase();
-    currentBox.style.backgroundColor = "#9e9d9d";
-    if (word.indexOf(char) !== -1) {
-      currentBox.style.backgroundColor = "#ffd380";
-    }
     if (char === word[i]) {
-      currentBox.style.backgroundColor = "#80ff80";
+      currentBox.classList.add("green");
+      lettersLeft = lettersLeft.replace(char, "");
+      // console.log("AFTER", lettersLeft);
     }
-    inputsReadOnly(currentLineBoxes);
   }
+  for (let i = 0; i < currentLineBoxes.length; i++) {
+    let currentBox = currentLineBoxes[i];
+    let char = currentBox.value.toUpperCase();
+    if (!currentBox.classList.contains("green")) {
+      if (lettersLeft.includes(char)) {
+        currentBox.classList.add("orange");
+      } else {
+        currentBox.classList.add("grey");
+        wrongChars.push(char);
+      }
+    }
+    // console.log("WORNG LETTERS:", wrongChars);
+  }
+
+  inputsReadOnly(currentLineBoxes);
 }
+
+// function colorChars(currentLineBoxes) {
+//   alert(word);
+//   const green = "#80ff80";
+//   const orange = "#ffd380";
+//   const grey = "#9e9d9d";
+//   for (const char of currentLineBoxes) {
+//     alert(char.value.toUpperCase());
+//     if (char.value.toUpperCase() === word[i]) {
+//       char.style.backgroundColor = green;
+//       return;
+//     }
+//     if (word.includes(char)) {
+//       char.style.backgroundColor = orange;
+//     } else {
+//       char.style.backgroundColor = grey;
+//     }
+//   }
+// for (let i = 0; i < currentLineBoxes.length; i++) {
+//   currentLineBoxes[i].value.toUpperCase() === word[i]
+//     ? (currentLineBoxes[i].style.backgroundColor = green)
+//     : "";
+// }
+// for (let i = 0; i < currentLineBoxes.length; i++) {
+//   if (currentLineBoxes[i].style.backgroundColor !== green) {
+//     word.indexOf(currentLineBoxes[i].value.toUpperCase()) !== -1
+//       ? (currentLineBoxes[i].style.backgroundColor = orange)
+//       : "";
+//   } else {
+//     currentLineBoxes[i].style.backgroundColor = grey;
+//   }
+// }
+// }
 
 async function checkword(e) {
   e.preventDefault();
   fullWord = false;
   if (isPlaying) {
-    console.log(word);
     let currentLine = document.querySelector(`.line-${attempts}`);
     let currentLineBoxes = currentLine.childNodes;
     createGuessedWord(currentLineBoxes);
@@ -204,6 +279,7 @@ const getWord = async () => {
     );
     const data = await res.json();
     word = data[0];
+
     getDefinition();
     word = word.toUpperCase();
     return word;
@@ -212,10 +288,13 @@ const getWord = async () => {
   }
 };
 
-const checkValidWord = async (word) => {
+const checkValidWord = async (wordToCheck) => {
+  if (word === wordToCheck) {
+    return true;
+  }
   try {
     const res = await fetch(
-      `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+      `https://api.dictionaryapi.dev/api/v2/entries/en/${wordToCheck.toLowerCase()}`
     );
     return Boolean(res.ok);
   } catch (e) {
@@ -282,6 +361,7 @@ const startGame = () => {
   attempts = 0;
   guessedWord = "";
   word = "";
+  wrongChars = [];
   outcome.textContent = "";
   wordTextArea.textContent = "";
   definitionTextArea.textContent = "";
