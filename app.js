@@ -227,6 +227,7 @@ async function checkword(e) {
 const clearCurrentLine = (inputBoxes) => {
   inputBoxes.forEach((box) => {
     box.value = "";
+    box.classList.remove("grey");
   });
   inputBoxes[0].focus();
 };
