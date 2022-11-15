@@ -9,6 +9,10 @@ const definitionTextArea = document.querySelector("#definitionTextArea");
 const attemptsLeftDisplay = document.querySelector("#attemptsLeftDisplay");
 const timerDisplay = document.querySelector("#timerDisplay");
 const outcome = document.querySelector("#outcome");
+const helpBlock = document.querySelector("#helpBlock");
+const overlay = document.querySelector("#overlay");
+const playBtn = document.querySelector("#playBtn");
+const helpBtn = document.querySelector("#helpBtn");
 const reg = /^[a-zA-Z]*$/;
 
 let isPlaying = true;
@@ -58,6 +62,7 @@ const timerCalc = () => {
       }
     }
   }
+
   let h = hours < 10 ? "0" + hours : hours;
   let m = minutes < 10 ? "0" + minutes : minutes;
   let s = seconds < 10 ? "0" + seconds : seconds;
@@ -76,15 +81,12 @@ document.body.addEventListener("keyup", function (e) {
   if (inputBox.classList == "input-box") {
     if (reg.test(inputBox.value) || e.code === "Enter") {
       startTimer();
-      // console.log(wrongChars);
       wrongChars.forEach((char) => {
         if (inputBox.value.toUpperCase() === char) {
           inputBox.classList.add("grey");
         }
       });
       if (inputBox.value.length == 1 && inputBox.nextElementSibling) {
-        // console.log(inputBox.value);
-
         inputBox.nextElementSibling.focus();
       }
       if (inputBox.value.length > 1) {
@@ -129,11 +131,12 @@ function createGuessedWord(currentLineBoxes) {
     let char = currentBox.value.toUpperCase();
     guessedWord += char;
   }
-  // console.log(guessedWord);
   if (guessedWord.length == 5) {
     fullWord = true;
   }
 }
+
+// ORIGINAL COLORCHARS FUNCTION BELOW - LEAVE FOR REFERENCE
 
 // function colorChars(currentLineBoxes) {
 //   for (let i = 0; i < currentLineBoxes.length; i++) {
@@ -152,16 +155,12 @@ function createGuessedWord(currentLineBoxes) {
 
 function colorChars(currentLineBoxes) {
   let lettersLeft = word;
-
-  // console.log(word);
-  // console.log(lettersLeft);
   for (let i = 0; i < currentLineBoxes.length; i++) {
     let currentBox = currentLineBoxes[i];
     let char = currentBox.value.toUpperCase();
     if (char === word[i]) {
       currentBox.classList.add("green");
       lettersLeft = lettersLeft.replace(char, "");
-      // console.log("AFTER", lettersLeft);
     }
   }
   for (let i = 0; i < currentLineBoxes.length; i++) {
@@ -177,51 +176,16 @@ function colorChars(currentLineBoxes) {
         }
       }
     }
-    // console.log("WORNG LETTERS:", wrongChars);
   }
-
   inputsReadOnly(currentLineBoxes);
 }
-
-// function colorChars(currentLineBoxes) {
-//   alert(word);
-//   const green = "#80ff80";
-//   const orange = "#ffd380";
-//   const grey = "#9e9d9d";
-//   for (const char of currentLineBoxes) {
-//     alert(char.value.toUpperCase());
-//     if (char.value.toUpperCase() === word[i]) {
-//       char.style.backgroundColor = green;
-//       return;
-//     }
-//     if (word.includes(char)) {
-//       char.style.backgroundColor = orange;
-//     } else {
-//       char.style.backgroundColor = grey;
-//     }
-//   }
-// for (let i = 0; i < currentLineBoxes.length; i++) {
-//   currentLineBoxes[i].value.toUpperCase() === word[i]
-//     ? (currentLineBoxes[i].style.backgroundColor = green)
-//     : "";
-// }
-// for (let i = 0; i < currentLineBoxes.length; i++) {
-//   if (currentLineBoxes[i].style.backgroundColor !== green) {
-//     word.indexOf(currentLineBoxes[i].value.toUpperCase()) !== -1
-//       ? (currentLineBoxes[i].style.backgroundColor = orange)
-//       : "";
-//   } else {
-//     currentLineBoxes[i].style.backgroundColor = grey;
-//   }
-// }
-// }
 
 async function checkword(e) {
   e.preventDefault();
   fullWord = false;
+  let currentLine = document.querySelector(`.line-${attempts}`);
+  let currentLineBoxes = currentLine.childNodes;
   if (isPlaying) {
-    let currentLine = document.querySelector(`.line-${attempts}`);
-    let currentLineBoxes = currentLine.childNodes;
     createGuessedWord(currentLineBoxes);
     if (fullWord) {
       let validWord = await checkValidWord(guessedWord);
@@ -252,12 +216,20 @@ async function checkword(e) {
         }
       } else {
         alert(`"${guessedWord}" is not a valid word...`);
+        clearCurrentLine(currentLineBoxes);
       }
     } else {
       alert("Enter the missing letter(s)");
     }
   }
 }
+
+const clearCurrentLine = (inputBoxes) => {
+  inputBoxes.forEach((box) => {
+    box.value = "";
+  });
+  inputBoxes[0].focus();
+};
 
 const inputsReadOnly = (inputs) => {
   inputs.forEach((i) => {
@@ -367,5 +339,20 @@ const startGame = () => {
   definitionTextArea.textContent = "";
   addWordRow();
 };
+
+const togglePopup = () => {
+  helpBlock.classList.toggle("hide");
+  overlay.classList.toggle("overlay");
+};
+
+window.onload = () => {
+  if (!localStorage.getItem("popupShown")) {
+    togglePopup();
+    localStorage.setItem("popupShown", "true");
+  }
+};
+
+playBtn.addEventListener("click", togglePopup);
+helpBtn.addEventListener("click", togglePopup);
 
 startGame();

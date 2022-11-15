@@ -8,23 +8,40 @@
     <title>Jordle: A Word Guessing</title>
   </head>
   <body>
+    <div id="overlay"></div>
     <div class="word-block">
       <h1 class="title">Jordle</h1>
-      <h2 class="subheading">Guess the random 5 letter word</h2>
+      <h2 class="subheading">Guess the mystery 5 letter word</h2>
       <h3 class="attempts-text">
         Attempts remaining: <span id="attemptsLeftDisplay"></span>
       </h3>
       <div id="timerDisplay">00 : 00 : 00 : 000</div>
       <div id="inputArea"></div>
-      <button id="wordBtn">Check</button>
       <div id="outcome"></div>
       <div id="wordTextArea"></div>
       <div id="definitionTextArea"></div>
+      <button id="wordBtn">Check</button>
       <button id="restartBtn">New Word</button>
-      <h5 class="help-text">
-        A green box means the letter is in the right place. <br />
-        An orange box means the word contains the letter at least once.
-      </h5>
+      <button id="helpBtn">Help</button>
+      <div id="helpBlock" class="hide">
+        <h1>Welcome to Jordle</h1>
+        <h3 class="help-subheading">
+          Guess the mystery word within 5 attempts to win.
+        </h3>
+        <p class="help-text">
+          A green box means the letter is in the right place. <br />
+        </p>
+        <p class="help-text">
+          An orange box means the mystery word contains the letter
+          <i>at least once</i>. <br />
+        </p>
+        <p class="help-text">
+          A grey box means the mystery word does not contain the letter in the
+          word. If a letter appears grey after you type it, that means you have
+          already used that word.
+        </p>
+        <button id="playBtn">Play</button>
+      </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
     <script src="app.js"></script>
