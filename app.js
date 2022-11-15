@@ -171,8 +171,9 @@ function colorChars(currentLineBoxes) {
       if (lettersLeft.includes(char)) {
         currentBox.classList.add("orange");
       } else {
-        currentBox.classList.add("grey");
+        
         if (!word.contains(char)) {
+          currentBox.classList.add("grey");
           wrongChars.push(char);
         }
       }
