@@ -170,7 +170,7 @@ function colorChars(currentLineBoxes) {
       if (lettersLeft.includes(char)) {
         currentBox.classList.add("orange");
         //newcode
-lettersLeft.replace(char, "")
+        lettersLeft.replace(char, "")
       } else {
         currentBox.classList.add("grey");
         if (!word.includes(char)) {
